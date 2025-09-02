@@ -2,4 +2,4 @@
 title: "About"
 ---
 
-About this site
+This training material was created within the AIML4OS framework using the provided Quarto template. It introduces the concept of the confusion matrix in Python with practical examples based on the scikit-learn library and the Iris dataset. The aim is to support learners in understanding model evaluation techniques in an accessible and reproducible way.

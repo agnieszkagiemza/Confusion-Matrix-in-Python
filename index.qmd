@@ -1,17 +1,14 @@
 ---
-title: "Template for WP6 training material" # See below for multilingual resource
+title: "Confusion Matrix - training materials" # See below for multilingual resource
 include-before-body:
   - text: <img src="resources/cover/main2.png" style="max-width:900px;width:100%"><br>
 author:
-  - name: Public Statistician 1
-    url: https://github.com/publicstatistician1
-    email: Public.Statistician1@statistics.org
-  - name: Public Statistician 2
-    url: https://github.com/publicstatistician2
-    email: Public.Statistician2@statistics.org
-date: "2025-05-16"
-doi: "10.1000/182"  # Optional
-license: "CC-BY 4.0"  # Optional
+  - name: Agnieszka Giemza
+   
+    email: a.giemza@stat.gov.pl
+
+date: "2025-09-02"
+
 
 # If resources is multilingual, adopt that structure
 # (need to have both title and title-* fields)
@@ -19,8 +16,10 @@ license: "CC-BY 4.0"  # Optional
 # title-en: "Hello SSPCloud"
 # title-fr: "Bonjour SSPCloud"
 
-description: |
-    This template is a fast starting pack for AIML4OS projects that use `R`. For `Python` projects, see [this `Github` repository](https://github.com/InseeFrLab/AIML4OS-template-quarto-python).
+description: 
+    This training material was prepared using the AIML4OS template. 
+    It demonstrates how to work with a confusion matrix in `Python`, 
+    applying the `scikit-learn` library and the `Iris` dataset..
 
 # If resources is multilingual, adopt that structure
 # (need to have both description and description-* fields)
@@ -46,16 +45,16 @@ image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY-OenRMvFyZUfDm_s
 
 # Custom metadata for training portals -------------------------------------
 
-duration: "90"  # Duration in minutes
+duration: "5"  # Duration in minutes
 
 skills:
   - Git Basics
   - Quarto Authoring
   - Reproducible Research
-  - Using SSPCloud
+  - Using Python
 
 courseMaterial:
-  - R Scripts
+  - Python Scripts
   # - Videos
   # - Jupyter Notebooks
 
@@ -65,7 +64,7 @@ publicLevel:
   # - Expert
 
 resourceLanguage:
-  - R
+  -   Python
   # - Python
 
 suggestedBefore:
@@ -90,14 +89,16 @@ gsbpm: "5.1" # See complete taxonomy: https://www.unescap.org/sites/default/d8fi
 ---
 
 
-# What is this template?
+# What is this material?
 
-This template is a Quarto Website customized for the AIML4OS project, designed to be used with {{< fa brands r-project >}}.
+This material was created using the AIML4OS Quarto template.  
+It presents the concept of the confusion matrix in {{< fa brands python >}},  
+with practical examples based on the `scikit-learn` library and the `Iris` dataset. .
 
 # How to use it?
 
-See [this tutorial](https://inseefrlab.github.io/formation-starting-pack/).
-
+See [this tutorial](https://inseefrlab.github.io/formation-starting-pack/)  
+to learn how to adapt the template for your own training material.
 
 
 

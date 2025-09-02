@@ -1,0 +1,256 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Confusion Matrix\"\n",
+        "\n",
+        "format:\n",
+        "  html:\n",
+        "    code-fold: true\n",
+        "---\n",
+        "\n",
+        "\n",
+        "##  Objective\n",
+        "\n",
+        "This tutorial demonstrates how to use the **confusion matrix** to evaluate the performance of a classification model in Python using `scikit-learn`. We will:\n",
+        "\n",
+        "- Load and prepare the Iris dataset\n",
+        "- Build a Decision Tree classifier\n",
+        "- Generate predictions\n",
+        "- Calculate classification metrics (accuracy, precision, recall, F1 score)\n",
+        "- Visualize the confusion matrix\n",
+        "- Print a detailed classification report\n",
+        "\n",
+        "---\n",
+        "\n",
+        "## Import required libraries\n",
+        "\n",
+        "We begin by importing the necessary libraries for data loading, modeling, evaluation, and visualization."
+      ],
+      "id": "d17e571b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import matplotlib.pyplot as plt\n",
+        "import seaborn as sns\n",
+        "from sklearn.datasets import load_iris\n",
+        "from sklearn.model_selection import train_test_split\n",
+        "from sklearn.tree import DecisionTreeClassifier\n",
+        "from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, classification_report"
+      ],
+      "id": "5663d59d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Load and inspect the Iris dataset\n",
+        "We load the classic Iris dataset from scikit-learn. This dataset contains three flower classes: setosa, versicolor, and virginica"
+      ],
+      "id": "e45e3243"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: ':loading_iris'\n",
+        "iris = load_iris()\n",
+        "X = iris.data\n",
+        "y = iris.target\n",
+        "target_names = iris.target_names"
+      ],
+      "id": "loading_iris",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Select only two classes: versicolor and virginica\n",
+        "To simplify the binary classification problem, we filter out only the samples labeled as 1 (versicolor) and 2 (virginica)."
+      ],
+      "id": "9a4436e9"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "mask = (y == 1) | (y == 2)\n",
+        "X = X[mask]\n",
+        "y = y[mask]"
+      ],
+      "id": "8a4a5527",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Split the data into training and test sets\n",
+        "We split the dataset into 70% training and 30% test sets using train_test_split."
+      ],
+      "id": "c6ebf837"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)"
+      ],
+      "id": "398b67ea",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Train a Decision Tree Classifier\n",
+        "We use a simple Decision Tree model to classify the flower samples."
+      ],
+      "id": "4b30720e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "model = DecisionTreeClassifier(random_state=42)\n",
+        "model.fit(X_train, y_train)"
+      ],
+      "id": "ca163ebd",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Make predictions\n",
+        "After training the model, we predict the classes for the test set."
+      ],
+      "id": "395104e9"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "y_pred = model.predict(X_test)"
+      ],
+      "id": "0f91ceeb",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Calculate evaluation metrics\n",
+        "Now we calculate common classification metrics:\n",
+        "\n",
+        "- Accuracy: Overall correctness\n",
+        "\n",
+        "- Precision: How many selected items are relevant\n",
+        "\n",
+        "- Recall: How many relevant items are selected\n",
+        "\n",
+        "- F1 Score: Harmonic mean of precision and recall"
+      ],
+      "id": "e61c10bf"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "cm = confusion_matrix(y_test, y_pred)\n",
+        "acc = accuracy_score(y_test, y_pred)\n",
+        "prec = precision_score(y_test, y_pred)\n",
+        "rec = recall_score(y_test, y_pred)\n",
+        "f1 = f1_score(y_test, y_pred)\n",
+        "\n",
+        "print(\"Accuracy:\", acc)\n",
+        "print(\"Precision:\", prec)\n",
+        "print(\"Recall:\", rec)\n",
+        "print(\"F1 Score:\", f1)"
+      ],
+      "id": "0ad6eaf0",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Visualize the Confusion Matrix\n",
+        "A confusion matrix  @cm is a table that describes the performance of a classification model. Each row represents the instances in an actual class, while each column represents the instances in a predicted class."
+      ],
+      "id": "a7cc620b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: cm\n",
+        "#| tbl-cap: Confusion matrix\n",
+        "plt.figure(figsize=(6, 5))\n",
+        "sns.heatmap(cm, annot=True, fmt=\"d\", cmap=\"Blues\", \n",
+        "            xticklabels=[\"versicolor\", \"virginica\"],\n",
+        "            yticklabels=[\"versicolor\", \"virginica\"])\n",
+        "plt.xlabel(\"Predicted label\")\n",
+        "plt.ylabel(\"True label\")\n",
+        "plt.title(\"Confusion Matrix\")\n",
+        "plt.tight_layout()\n",
+        "plt.show()"
+      ],
+      "id": "cm",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Detailed Classification Report\n",
+        "We use classification_report() to display precision, recall, F1-score, and support (number of true instances) for each class."
+      ],
+      "id": "a9068084"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(classification_report(y_test, y_pred, target_names=[\"versicolor\", \"virginica\"]))"
+      ],
+      "id": "858f7388",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Summary\n",
+        "The confusion matrix and related metrics provide a comprehensive view of model performance. In binary classification problems like this one, it's crucial to go beyond simple accuracy and analyze precision, recall, and F1-score, especially if the classes are imbalanced."
+      ],
+      "id": "eda463f2"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/opt/python/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
