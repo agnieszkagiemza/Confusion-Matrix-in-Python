@@ -25,10 +25,6 @@ We will:
 
 We begin by importing the necessary libraries for data loading, modeling, evaluation, and visualization.
 ```{python}
-% pip install seaborn
-```
-
-```{python}
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.datasets import load_iris
