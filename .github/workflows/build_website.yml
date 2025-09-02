@@ -3,7 +3,7 @@ name: Build the website
 on:
   push:
     branches:
-      - main
+      - main   # Triggers workflow on push to the main branch
   workflow_dispatch:
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
       contents: write
 
     steps:
-      # Step 1: Checkout repository
+      # Step 1: Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -24,36 +24,23 @@ jobs:
           version: "latest"
           python-version: 3.12
 
-      # Step 2b: Restore uv environment
       - name: Restore environment
         run: uv sync
-
-      # Step 2c: Install Python dependencies
-      - name: Install Python dependencies
-        run: uv run pip install -r requirements.txt
-
-      # Step 2d: Install ipykernel to make uv environment visible to Quarto
-      - name: Install ipykernel
-        run: uv run pip install ipykernel
-
-      # Step 2e: Debug – list installed packages
-      - name: List installed Python packages
-        run: uv run pip list
 
       # Step 3: Set up Quarto
       - name: Set up quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      # Step 4: Render Quarto (HTML) using uv environment
-      - name: Render HTML
-        run: uv run quarto render --execute --no-cache
+      # Step 4: Render Quarto in uv virtual environment (HTML)
+      - name: Render
+        run: uv run quarto render
 
-      # Step 4b: Render Quarto to ipynb using uv environment
-      - name: Render ipynb
-        run: uv run quarto render --to ipynb --execute --no-cache
-
-      # Step 5: Publish to GitHub Pages
-      - name: Publish to GitHub Pages
+      # # Step 4b: Render Quarto in uv virtual environment (HTML)
+      # - name: Render in ipynb
+      #   run: uv run quarto render --to ipynb
+        
+      # Step 5: Publish website
+      - name: Publish to GitHub Pages (and render)
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
