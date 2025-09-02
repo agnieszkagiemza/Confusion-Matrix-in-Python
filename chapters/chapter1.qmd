@@ -9,7 +9,8 @@ format:
 
 ##  Objective
 
-This tutorial demonstrates how to use the **confusion matrix** to evaluate the performance of a classification model in Python using `scikit-learn`. We will:
+This tutorial demonstrates how to use the **confusion matrix** to evaluate the performance of a classification model in Python using `scikit-learn`. 
+We will:
 
 - Load and prepare the Iris dataset
 - Build a Decision Tree classifier
