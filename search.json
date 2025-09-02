@@ -1,0 +1,132 @@
+[
+  {
+    "objectID": "chapters/chapter1.html",
+    "href": "chapters/chapter1.html",
+    "title": "Confusion Matrix",
+    "section": "",
+    "text": "This tutorial demonstrates how to use the confusion matrix to evaluate the performance of a classification model in Python using scikit-learn. We will:\n\nLoad and prepare the Iris dataset\nBuild a Decision Tree classifier\nGenerate predictions\nCalculate classification metrics (accuracy, precision, recall, F1 score)\nVisualize the confusion matrix\nPrint a detailed classification report",
+    "crumbs": [
+      "A complete example"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter1.html#objective",
+    "href": "chapters/chapter1.html#objective",
+    "title": "Confusion Matrix",
+    "section": "",
+    "text": "This tutorial demonstrates how to use the confusion matrix to evaluate the performance of a classification model in Python using scikit-learn. We will:\n\nLoad and prepare the Iris dataset\nBuild a Decision Tree classifier\nGenerate predictions\nCalculate classification metrics (accuracy, precision, recall, F1 score)\nVisualize the confusion matrix\nPrint a detailed classification report",
+    "crumbs": [
+      "A complete example"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter1.html#import-required-libraries",
+    "href": "chapters/chapter1.html#import-required-libraries",
+    "title": "Confusion Matrix",
+    "section": "Import required libraries",
+    "text": "Import required libraries\nWe begin by importing the necessary libraries for data loading, modeling, evaluation, and visualization.\n\n\nCode\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nfrom sklearn.datasets import load_iris\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.tree import DecisionTreeClassifier\nfrom sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, classification_report",
+    "crumbs": [
+      "A complete example"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter1.html#load-and-inspect-the-iris-dataset",
+    "href": "chapters/chapter1.html#load-and-inspect-the-iris-dataset",
+    "title": "Confusion Matrix",
+    "section": "Load and inspect the Iris dataset",
+    "text": "Load and inspect the Iris dataset\nWe load the classic Iris dataset from scikit-learn. This dataset contains three flower classes: setosa, versicolor, and virginica\n\n\nCode\niris = load_iris()\nX = iris.data\ny = iris.target\ntarget_names = iris.target_names",
+    "crumbs": [
+      "A complete example"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter1.html#select-only-two-classes-versicolor-and-virginica",
+    "href": "chapters/chapter1.html#select-only-two-classes-versicolor-and-virginica",
+    "title": "Confusion Matrix",
+    "section": "Select only two classes: versicolor and virginica",
+    "text": "Select only two classes: versicolor and virginica\nTo simplify the binary classification problem, we filter out only the samples labeled as 1 (versicolor) and 2 (virginica).\n\n\nCode\nmask = (y == 1) | (y == 2)\nX = X[mask]\ny = y[mask]",
+    "crumbs": [
+      "A complete example"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter1.html#split-the-data-into-training-and-test-sets",
+    "href": "chapters/chapter1.html#split-the-data-into-training-and-test-sets",
+    "title": "Confusion Matrix",
+    "section": "Split the data into training and test sets",
+    "text": "Split the data into training and test sets\nWe split the dataset into 70% training and 30% test sets using train_test_split.\n\n\nCode\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)",
+    "crumbs": [
+      "A complete example"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter1.html#train-a-decision-tree-classifier",
+    "href": "chapters/chapter1.html#train-a-decision-tree-classifier",
+    "title": "Confusion Matrix",
+    "section": "Train a Decision Tree Classifier",
+    "text": "Train a Decision Tree Classifier\nWe use a simple Decision Tree model to classify the flower samples.\n\n\nCode\nmodel = DecisionTreeClassifier(random_state=42)\nmodel.fit(X_train, y_train)\n\n\nDecisionTreeClassifier(random_state=42)In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.DecisionTreeClassifier?Documentation for DecisionTreeClassifieriFitted\n        \n            \n                Parameters\n                \n\n\n\n\ncriterion \n'gini'\n\n\n\nsplitter \n'best'\n\n\n\nmax_depth \nNone\n\n\n\nmin_samples_split \n2\n\n\n\nmin_samples_leaf \n1\n\n\n\nmin_weight_fraction_leaf \n0.0\n\n\n\nmax_features \nNone\n\n\n\nrandom_state \n42\n\n\n\nmax_leaf_nodes \nNone\n\n\n\nmin_impurity_decrease \n0.0\n\n\n\nclass_weight \nNone\n\n\n\nccp_alpha \n0.0\n\n\n\nmonotonic_cst \nNone",
+    "crumbs": [
+      "A complete example"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter1.html#make-predictions",
+    "href": "chapters/chapter1.html#make-predictions",
+    "title": "Confusion Matrix",
+    "section": "Make predictions",
+    "text": "Make predictions\nAfter training the model, we predict the classes for the test set.\n\n\nCode\ny_pred = model.predict(X_test)",
+    "crumbs": [
+      "A complete example"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter1.html#calculate-evaluation-metrics",
+    "href": "chapters/chapter1.html#calculate-evaluation-metrics",
+    "title": "Confusion Matrix",
+    "section": "Calculate evaluation metrics",
+    "text": "Calculate evaluation metrics\nNow we calculate common classification metrics:\n\nAccuracy: Overall correctness\nPrecision: How many selected items are relevant\nRecall: How many relevant items are selected\nF1 Score: Harmonic mean of precision and recall\n\n\n\nCode\ncm = confusion_matrix(y_test, y_pred)\nacc = accuracy_score(y_test, y_pred)\nprec = precision_score(y_test, y_pred)\nrec = recall_score(y_test, y_pred)\nf1 = f1_score(y_test, y_pred)\n\nprint(\"Accuracy:\", acc)\nprint(\"Precision:\", prec)\nprint(\"Recall:\", rec)\nprint(\"F1 Score:\", f1)\n\n\nAccuracy: 0.7666666666666667\nPrecision: 0.7272727272727273\nRecall: 0.9411764705882353\nF1 Score: 0.8205128205128205",
+    "crumbs": [
+      "A complete example"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter1.html#visualize-the-confusion-matrix",
+    "href": "chapters/chapter1.html#visualize-the-confusion-matrix",
+    "title": "Confusion Matrix",
+    "section": "Visualize the Confusion Matrix",
+    "text": "Visualize the Confusion Matrix\nA confusion matrix @cm is a table that describes the performance of a classification model. Each row represents the instances in an actual class, while each column represents the instances in a predicted class.\n\n\nCode\nplt.figure(figsize=(6, 5))\nsns.heatmap(cm, annot=True, fmt=\"d\", cmap=\"Blues\", \n            xticklabels=[\"versicolor\", \"virginica\"],\n            yticklabels=[\"versicolor\", \"virginica\"])\nplt.xlabel(\"Predicted label\")\nplt.ylabel(\"True label\")\nplt.title(\"Confusion Matrix\")\nplt.tight_layout()\nplt.show()",
+    "crumbs": [
+      "A complete example"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter1.html#detailed-classification-report",
+    "href": "chapters/chapter1.html#detailed-classification-report",
+    "title": "Confusion Matrix",
+    "section": "Detailed Classification Report",
+    "text": "Detailed Classification Report\nWe use classification_report() to display precision, recall, F1-score, and support (number of true instances) for each class.\n\n\nCode\nprint(classification_report(y_test, y_pred, target_names=[\"versicolor\", \"virginica\"]))\n\n\n              precision    recall  f1-score   support\n\n  versicolor       0.73      0.94      0.82        17\n   virginica       0.88      0.54      0.67        13\n\n    accuracy                           0.77        30\n   macro avg       0.80      0.74      0.74        30\nweighted avg       0.79      0.77      0.75        30",
+    "crumbs": [
+      "A complete example"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter1.html#summary",
+    "href": "chapters/chapter1.html#summary",
+    "title": "Confusion Matrix",
+    "section": "Summary",
+    "text": "Summary\nThe confusion matrix and related metrics provide a comprehensive view of model performance. In binary classification problems like this one, it’s crucial to go beyond simple accuracy and analyze precision, recall, and F1-score, especially if the classes are imbalanced.",
+    "crumbs": [
+      "A complete example"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Confusion Matrix - training materials",
+    "section": "",
+    "text": "What is this material?\nThis material was created using the AIML4OS Quarto template.\nIt presents the concept of the confusion matrix in ,\nwith practical examples based on the scikit-learn library and the Iris dataset. .\n\n\nHow to use it?\nSee this tutorial\nto learn how to adapt the template for your own training material.",
+    "crumbs": [
+      "Introduction"
+    ]
+  }
+]
