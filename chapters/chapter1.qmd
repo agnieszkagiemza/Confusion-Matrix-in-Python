@@ -34,7 +34,7 @@ from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, r
 
 ```
 ## Load and inspect the Iris dataset
-We load the classic Iris dataset from scikit-learn. This dataset contains three flower classes: setosa, versicolor, and virginica
+We load the classic Iris dataset from **scikit-learn**. This dataset contains three flower classes: setosa, versicolor, and virginica
 
 ```{python}
 #| label: :loading_iris
