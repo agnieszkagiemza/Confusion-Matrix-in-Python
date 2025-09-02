@@ -3,7 +3,7 @@ name: Build the website
 on:
   push:
     branches:
-      - main   # Triggers workflow on push to the main branch
+      - main
   workflow_dispatch:
 
 jobs:
@@ -32,16 +32,20 @@ jobs:
       - name: Install Python dependencies
         run: uv run pip install -r requirements.txt
 
+      # Step 2d: List installed Python packages (for debugging)
+      - name: List installed Python packages
+        run: uv run pip list
+
       # Step 3: Set up Quarto
       - name: Set up quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
       # Step 4: Render Quarto in uv virtual environment (HTML)
-      - name: Render
+      - name: Render HTML
         run: uv run quarto render
 
       # Step 4b: Render Quarto in uv virtual environment (ipynb)
-      - name: Render in ipynb
+      - name: Render ipynb
         run: uv run quarto render --to ipynb
         
       # Step 5: Publish website
