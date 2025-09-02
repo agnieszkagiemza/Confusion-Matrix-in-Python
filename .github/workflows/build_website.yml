@@ -17,15 +17,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Install uv
+      # Step 2: Install the latest version of uv
       - name: Install the latest version of uv
         uses: astral-sh/setup-uv@v6
         with:
           version: "latest"
           python-version: 3.12
 
+      # Step 2b: Restore environment
       - name: Restore environment
         run: uv sync
+
+      # Step 2c: Install Python dependencies from requirements.txt
+      - name: Install Python dependencies
+        run: uv run pip install -r requirements.txt
 
       # Step 3: Set up Quarto
       - name: Set up quarto
@@ -35,12 +40,12 @@ jobs:
       - name: Render
         run: uv run quarto render
 
-      # Step 4b: Render Quarto in uv virtual environment (HTML)
+      # Step 4b: Render Quarto in uv virtual environment (ipynb)
       - name: Render in ipynb
         run: uv run quarto render --to ipynb
         
       # Step 5: Publish website
-      - name: Publish to GitHub Pages (and render)
+      - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
