@@ -24,6 +24,9 @@ We will:
 ## Import required libraries
 
 We begin by importing the necessary libraries for data loading, modeling, evaluation, and visualization.
+```{python}
+% pip install seaborn
+```
 
 ```{python}
 import matplotlib.pyplot as plt
